@@ -1,6 +1,13 @@
-include internal/Makefile.in
+all:
 
-sources:
-	@for source_file in $(C_SRCS); do \
-		echo internal/$${source_file##*@}; \
-	done
+config:
+	cd internal && \
+		./configure \
+		--with-jemalloc-prefix="je_" --disable-valgrind
+
+build:
+	make -C internal -j4
+	go build
+
+clean distclean:
+	make -C internal $@
