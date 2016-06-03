@@ -1,8 +1,7 @@
 all:
 
 config:
-	cd internal && \
-		./configure \
+	cd internal && ./autogen.sh \
 		--with-jemalloc-prefix="je_" --disable-valgrind
 
 build:
