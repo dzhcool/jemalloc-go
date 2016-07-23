@@ -1,6 +1,12 @@
 # jemalloc
 
+``bash
+$ mkdir -p $GOPATH/src/github.com/spinlock && cd $_
+$ git clone git@github.com:spinlock/jemalloc-go.git
+$ make install
 ```
+
+```go
 package demo
 
 // #cgo         CPPFLAGS: -I <relative-path>/jemalloc-go/jemalloc/include
