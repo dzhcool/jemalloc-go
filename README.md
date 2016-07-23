@@ -22,7 +22,9 @@ func free(p unsafe.Pointer) {
 
 #### How to setup & install
 ```bash
-$ mkdir -p $GOPATH/src/github.com/spinlock && cd $_
+$ mkdir -p $GOPATH/src/github.com/spinlock
+$ cd $_
 $ git clone https://github.com/spinlock/jemalloc-go.git
+$ cd jemalloc-go
 $ make install
 ```
