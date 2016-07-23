@@ -1,16 +1,16 @@
 # jemalloc
 
-This is a go-gettable version of the jemalloc allocator for use in Go code that
-needs to link against jemalloc but wants to integrate with `go get` and
-`go build`.
-
-To use in your project you need to import the package and set appropriate cgo flag directives:
-
 ```
-import _ "github.com/cockroachdb/c-jemalloc"
+package demo
 
-// #cgo CPPFLAGS: -I <relative-path>/c-jemalloc/internal/include
-// #cgo darwin LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
+// #cgo         CPPFLAGS: -I <relative-path>/jemalloc-go/jemalloc/include
+// #cgo  darwin LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
 // #cgo !darwin LDFLAGS: -Wl,-unresolved-symbols=ignore-all
+// #include <jemalloc/jemalloc.h>
 import "C"
+import _ "github.com/spinlock/jemalloc-go"
+
+func malloc(n int) unsafe.Pointer {
+    return C.je_malloc(C.size_t(n))
+}
 ```

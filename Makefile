@@ -1,21 +1,15 @@
 .DEFAULT_GOAL = all
 
+all:
+	@test -f jemalloc/Makefile || make config --quiet
+
 config:
 	cd jemalloc && ./autogen.sh --with-jemalloc-prefix="je_"
-	@make -f helps.mk --quiet relink
-
-ifeq ("$(wildcard jemalloc/Makefile)","")
-
-all: config
+	@make -f help.mk --quiet relink
 
 clean distclean:
+	@test -f jemalloc/Makefile && make -C jemalloc --quiet distclean || true
+	@make -f help.mk --quiet rmlink
 
-else
-
-all:
-
-clean distclean:
-	@make -C jemalloc --quiet distclean
-	@make -f helps.mk --quiet rmlink
-
-endif
+install: all
+	go install ./
