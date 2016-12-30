@@ -1,3 +1,5 @@
 /je_*.c
+/jemalloc
+/VERSION
 
 *.swp

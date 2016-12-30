@@ -4,7 +4,7 @@
 ```go
 package demo
 
-// #cgo         CPPFLAGS: -I <relative-path>/jemalloc-go/include
+// #cgo         CPPFLAGS: -I <relative-path>/jemalloc-go
 // #cgo  darwin LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
 // #cgo !darwin LDFLAGS: -Wl,-unresolved-symbols=ignore-all
 // #include <jemalloc/jemalloc.h>
