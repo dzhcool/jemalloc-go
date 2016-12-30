@@ -1,6 +1,6 @@
 package jemalloc
 
-// #cgo         CFLAGS: -Ijemalloc -std=gnu99
+// #cgo         CFLAGS: -I. -std=gnu99
 // #cgo       CPPFLAGS: -D_REENTRANT
 // #cgo linux CPPFLAGS: -D_GNU_SOURCE
 // #cgo        LDFLAGS: -lm

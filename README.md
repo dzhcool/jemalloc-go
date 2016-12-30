@@ -1,6 +1,17 @@
 # jemalloc
 [![Build Status](https://travis-ci.org/spinlock/jemalloc-go.svg)](https://travis-ci.org/spinlock/jemalloc-go)
 
+#### How to setup & install
+```bash
+$ mkdir -p $GOPATH/src/github.com/spinlock
+$ cd $_
+$ git clone https://github.com/spinlock/jemalloc-go.git
+$ cd jemalloc-go
+$ make install
+```
+
+#### How to use it with CGo
+
 ```go
 package demo
 
@@ -20,11 +31,19 @@ func free(p unsafe.Pointer) {
 }
 ```
 
-#### How to setup & install
-```bash
-$ mkdir -p $GOPATH/src/github.com/spinlock
-$ cd $_
-$ git clone https://github.com/spinlock/jemalloc-go.git
-$ cd jemalloc-go
-$ make install
+#### How to use it with Go
+
+```go
+package demo
+
+import jemalloc "github.com/spinlock/jemalloc-go"
+
+func malloc(n int) unsafe.Pointer {
+    return jemalloc.Malloc(n)
+}
+
+func free(p unsafe.Pointer) {
+    jemalloc.Free(p)
+}
 ```
+
