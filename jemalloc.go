@@ -1,6 +1,10 @@
 package jemalloc
 
-// #include<jemalloc/jemalloc.h>
+// #cgo         CPPFLAGS: -I.
+// #cgo         LDFLAGS: -Linstall -ljemalloc
+// #cgo  darwin LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
+// #cgo !darwin LDFLAGS: -Wl,-unresolved-symbols=ignore-all
+// #include <jemalloc/jemalloc.h>
 import "C"
 
 import "unsafe"

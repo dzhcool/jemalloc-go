@@ -1,17 +1,20 @@
-.DEFAULT_GOAL = all
+.DEFAULT_GOAL = build-all
 
-SOURCE := jemalloc-4.4.0
+PWD := $(shell pwd)
+SRC := jemalloc-4.4.0
 
-all:
-	@test -f $(SOURCE)/Makefile || make config --quiet
+build-all:
+	@test -f $(SRC)/Makefile || make config --quiet
+	@make -C $(SRC) install_lib_static -j8
 
 config:
-	cd $(SOURCE) && ./autogen.sh --with-jemalloc-prefix="je_"
-	@make -f help.mk --quiet relink
+	cd $(SRC) && ./autogen.sh --with-jemalloc-prefix="je_" --libdir=$(PWD)/install
 
 clean distclean:
-	@test -f $(SOURCE)/Makefile && make -C $(SOURCE) --quiet distclean || true
-	@make -f help.mk --quiet rmlink
+	@test -f $(SRC)/Makefile && make -C $(SRC) --quiet distclean || true
 
-install: all
+install: build-all
 	go install ./
+
+test:
+	go test -v ./
