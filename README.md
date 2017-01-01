@@ -15,12 +15,12 @@ $ make install
 ```go
 package demo
 
-// #cgo         CPPFLAGS: -I <relative-path>/jemalloc-go
-// #cgo          LDFLAGS: -L <relative-path>/jemalloc-go/lib -ljemalloc
+// #cgo         CPPFLAGS: -I<relative-path>/jemalloc-go
 // #cgo  darwin  LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
 // #cgo !darwin  LDFLAGS: -Wl,-unresolved-symbols=ignore-all
 // #include <jemalloc/jemalloc.h>
 import "C"
+
 import jemalloc "github.com/spinlock/jemalloc-go"
 
 func malloc1(n int) unsafe.Pointer {

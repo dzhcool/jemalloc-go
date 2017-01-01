@@ -1,9 +1,10 @@
 package jemalloc
 
-// #cgo         CPPFLAGS: -I.
-// #cgo          LDFLAGS: -Llib -ljemalloc
-// #cgo  darwin  LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
-// #cgo !darwin  LDFLAGS: -Wl,-unresolved-symbols=ignore-all
+// #cgo         CFLAGS: -I. -std=gnu99
+// #cgo       CPPFLAGS: -D_REENTRANT
+// #cgo linux CPPFLAGS: -D_GNU_SOURCE
+// #cgo        LDFLAGS: -lm
+// #cgo linux  LDFLAGS: -lrt
 // #include <jemalloc/jemalloc.h>
 import "C"
 

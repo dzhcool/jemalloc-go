@@ -1,23 +1,28 @@
-.DEFAULT_GOAL = build-all
+.DEFAULT_GOAL = build
 
 PWD := $(shell pwd)
 SRC := jemalloc-4.4.0
 
-build-all:
+build:
 	@test -f $(SRC)/Makefile || make config --quiet
-	@make -C $(SRC) install_lib_static -j8
+
+install: build
+	@go install -x -v ./
 
 config:
-	cd $(SRC) && ./autogen.sh --with-jemalloc-prefix="je_" --libdir=$(PWD)/lib
-	@rm -rf lib jemalloc VERSION
-	@ln -s $(SRC)/include/jemalloc jemalloc && ln -s $(SRC)/VERSION VERSION
+	@cd $(SRC) && ./autogen.sh --with-jemalloc-prefix="je_"
+	@rm -rf jemalloc VERSION
+	@ln -s $(SRC)/include/jemalloc
+	@ln -s $(SRC)/VERSION
+	@make -f help.mk relink
 
 clean distclean:
 	@test -f $(SRC)/Makefile && make -C $(SRC) --quiet distclean || true
-	@rm -rf lib jemalloc VERSION
+	@rm -rf jemalloc VERSION
+	@make -f help.mk unlink
 
-install: build-all
-	go install ./
+relink unlink:
+	@make -f help.mk $@
 
 test:
-	go test -v ./
+	@go test -v ./
