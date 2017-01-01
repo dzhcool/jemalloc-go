@@ -16,9 +16,9 @@ $ make install
 package demo
 
 // #cgo         CPPFLAGS: -I <relative-path>/jemalloc-go
-// #cgo         LDFLAGS:  -L <relative-path>/jemalloc-go/install -ljemalloc
-// #cgo  darwin LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
-// #cgo !darwin LDFLAGS: -Wl,-unresolved-symbols=ignore-all
+// #cgo          LDFLAGS: -L <relative-path>/jemalloc-go/lib -ljemalloc
+// #cgo  darwin  LDFLAGS: -Wl,-undefined -Wl,dynamic_lookup
+// #cgo !darwin  LDFLAGS: -Wl,-unresolved-symbols=ignore-all
 // #include <jemalloc/jemalloc.h>
 import "C"
 import jemalloc "github.com/spinlock/jemalloc-go"

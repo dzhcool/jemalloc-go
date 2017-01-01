@@ -1,3 +1,5 @@
-/install
+/lib
+/jemalloc
+/VERSION
 
 *.swp
