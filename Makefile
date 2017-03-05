@@ -1,7 +1,7 @@
 .DEFAULT_GOAL = build
 
 PWD := $(shell pwd)
-SRC := jemalloc-4.4.0
+SRC := jemalloc-4.5.0
 
 build:
 	@test -f $(SRC)/Makefile || make config --quiet
