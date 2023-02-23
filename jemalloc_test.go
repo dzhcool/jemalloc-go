@@ -1,4 +1,4 @@
-package jemalloc_test
+package jemalloc
 
 import (
 	"reflect"
