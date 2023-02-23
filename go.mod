@@ -1,3 +1,3 @@
-module github.com/dzhcool/jemalloc
+module github.com/dzhcool/jemalloc-go
 
-go 1.19
+go 1.18
